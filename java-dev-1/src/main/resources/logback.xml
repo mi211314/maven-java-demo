@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false" scan="true" scanPeriod="60 seconds" packagingData="true">
+    <!-- 设置 logger context 名称,一旦设置不可改变，默认为default -->
+    <contextName>myAppName</contextName>
+
+    <!--定义日志文件的存储地址 勿在 LogBack 的配置中使用相对路径-->
+    <!--<property name="LOG_HOME" value="D:\\logs" />-->
+
+    <!-- 控制台输出 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- encoders are by default assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder -->
+        <encoder>
+            <!--格式化输出：%d表示日期，%-5level：级别从左显示5个字符宽度，%thread表示线程名，%msg：日志消息，%n是换行符-->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level] [%thread] %logger{50}.%M\(%line\) - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 按照每天生成日志文件 -->
+    <!--<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        &lt;!&ndash; 当前活动日志文件名 &ndash;&gt;
+        <file>${LOG_HOME}\my_log.log</file>
+        &lt;!&ndash; 文件滚动策略根据%d{patter}中的“patter”而定，此处为每天产生一个文件 &ndash;&gt;
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            &lt;!&ndash; 归档文件名“.zip或.gz结尾”,表示归档文件自动压缩 &ndash;&gt;
+            &lt;!&ndash;<FileNamePattern>${LOG_HOME}\my_log.%d{yyyy-MM-dd}.log.zip</FileNamePattern>&ndash;&gt;
+            &lt;!&ndash;日志文件输出的文件名&ndash;&gt;
+            <FileNamePattern>${LOG_HOME}\my_log..%d{yyyy-MM-dd}.log</FileNamePattern>
+            &lt;!&ndash;日志文件保留天数&ndash;&gt;
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        &lt;!&ndash; encoders are by default assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder &ndash;&gt;
+        <encoder>
+            &lt;!&ndash;格式化输出：%d表示日期，%-5level：级别从左显示5个字符宽度，%thread表示线程名，%msg：日志消息，%n是换行符&ndash;&gt;
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level] [%thread] %logger{50}.%M\(%line\) - %msg%n</pattern>
+        </encoder>
+        &lt;!&ndash;日志文件最大的大小&ndash;&gt;
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>10MB</MaxFileSize>
+        </triggeringPolicy>
+    </appender>-->
+
+    <!-- 日志级别若没显示定义，则继承最近的父logger（该logger需显示定义level,直到rootLogger）的日志级别-->
+    <!-- logger的appender默认具有累加性（默认日志输出到当前logger的appender和所有祖先logger的appender中），可通过配置 “additivity”属性修改默认行为-->
+    <!--<logger name="com.logger.demo.slf4j.logback.ClassLogbackTest"  level="INFO" additivity="false" >
+        <appender-ref ref="FILE"/>
+    </logger>-->
+
+    <!-- 至多只能配置一个root -->
+    <!-- 日志输出级别 -->
+    <root level="INFO">
+        <appender-ref ref="STDOUT" />
+        <!--<appender-ref ref="FILE" />-->
+    </root>
+</configuration>
